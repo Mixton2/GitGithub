@@ -12,11 +12,11 @@ var docName = decodeURI(activeDocument.name);
 const dialogObject = {
   x: 150,
   y: 150,
-  width: 0,
-  height: 0,
+  width: 460,
+  height: 480,
   panel: {
     x: 25,
-    y: 105,
+    y: 17,
     width: 0,
     height: 0,
   }
@@ -34,17 +34,17 @@ const dialogObject = {
   }
   var f;
   var fileType;
-  var win = new Window("dialog", "CMDBANNER.IO EXPORT OPTIONS", [dialogObject.x, dialogObject.y, 460, 650]);
+  var win = new Window("dialog", "CMDBANNER.IO EXPORT OPTIONS", [dialogObject.x, dialogObject.y, dialogObject.width, dialogObject.height]);
 
   // Add a panel
-  win.radioPanel = win.add("panel", [dialogObject.panel.x, dialogObject.panel.y, 285, 230], "Export Options");
+  win.radioPanel = win.add("panel", [dialogObject.panel.x, dialogObject.panel.y * (3 * 2), 285, 232], "Export Options");
 
   // Add radio buttons
-  win.radioPanel.radOne = win.radioPanel.add("radiobutton", [10, 15, 300, 35], "PNG");
-  win.radioPanel.radTwo = win.radioPanel.add("radiobutton", [10, 45, 300, 65], "GIF");
-  win.radioPanel.radThree = win.radioPanel.add("radiobutton", [10, 75, 300, 95], "JPG");
+  win.radioPanel.radOne = win.radioPanel.add("radiobutton", [10, 15, 300, 35], "PNG"); // --[1]
+  win.radioPanel.radTwo = win.radioPanel.add("radiobutton", [10, 45, 300, 65], "GIF");// --[2]
+  win.radioPanel.radThree = win.radioPanel.add("radiobutton", [10, 75, 300, 95], "JPG");// --[3]
 
-  win.folderPanel = win.add("panel", [25, 15, 285, 90], "Save to");
+  win.folderPanel = win.add("panel", [dialogObject.panel.x, dialogObject.panel.y, 285, 90], "Save to");
   win.folderPanel.orientation = "row";
   // select folder
   win.folderPanel.btnFolderInput = win.folderPanel.add("button", [10, 15, 100, 35], "folder...");
@@ -53,13 +53,14 @@ const dialogObject = {
   });
 
   // bounds = [left, top, right, bottom]
-  win.btnPanel = win.add("panel", [25, 430, 285, 480],);
+  win.btnPanel = win.add("panel", [dialogObject.panel.x, 250, 285, 310],);
   win.btnPanel.orientation = "row";
   // Add the components, two buttons
   win.btnPanel.okBtn = win.btnPanel.add("button", [10, 15, 100, 35], "CONTINUE");
   win.btnPanel.cancelBtn = win.btnPanel.add("button", [150, 15, 220, 35], "CANCEL");
   // Register event listeners that define the button behavior
   // Event listener for the radio buttons
+  win.btnPanel.okBtn.enabled = false;
   win.radioPanel.radOne.onClick = win.radioPanel.radTwo.onClick = win.radioPanel.radThree.onClick = function () {
     var selected = "";
 
