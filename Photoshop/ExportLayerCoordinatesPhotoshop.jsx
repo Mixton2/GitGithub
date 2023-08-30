@@ -3,11 +3,21 @@
 
 // Bring application forward
 app.bringToFront();
-import { CreateDialog } from "./Dialog/dialog";
+
 // Set active Document variable and decode name for output
 var docRef = app.activeDocument;
 var docName = decodeURI(activeDocument.name);
 
+// =================================================================
+const dialogObject = {
+  x: 150,
+  y: 150,
+  width: 0,
+  height: 0,
+  
+};
+
+// =================================================================
 (function () {
   var artboards = docRef.layers;
 
@@ -19,7 +29,7 @@ var docName = decodeURI(activeDocument.name);
   }
   var f;
   var fileType;
-  var win = new Window("dialog", "CMDBANNER.IO EXPORT OPTIONS", [CreateDialog.x, CreateDialog.y, 460, 650]);
+  var win = new Window("dialog", "CMDBANNER.IO EXPORT OPTIONS", [dialogObject.x, dialogObject.y, 460, 650]);
 
   // Add a panel
   win.radioPanel = win.add("panel", [25, 105, 285, 230], "Export Options");
