@@ -14,7 +14,12 @@ const dialogObject = {
   y: 150,
   width: 0,
   height: 0,
-  
+  panel: {
+    x: 25,
+    y: 105,
+    width: 0,
+    height: 0,
+  }
 };
 
 // =================================================================
@@ -32,7 +37,7 @@ const dialogObject = {
   var win = new Window("dialog", "CMDBANNER.IO EXPORT OPTIONS", [dialogObject.x, dialogObject.y, 460, 650]);
 
   // Add a panel
-  win.radioPanel = win.add("panel", [25, 105, 285, 230], "Export Options");
+  win.radioPanel = win.add("panel", [dialogObject.panel.x, dialogObject.panel.y, 285, 230], "Export Options");
 
   // Add radio buttons
   win.radioPanel.radOne = win.radioPanel.add("radiobutton", [10, 15, 300, 35], "PNG");
