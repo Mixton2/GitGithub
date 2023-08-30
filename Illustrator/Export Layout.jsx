@@ -1,4 +1,4 @@
-﻿// Export Layout - Adobe Illustrator Script
+﻿C// Export Layout - Adobe Illustrator Script
 // Description: Export x and y coordinates to JSON
 // Requirements: Adobe Illustrator CS4 or greater
 // Version: 1.0-beta8
