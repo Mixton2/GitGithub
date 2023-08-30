@@ -3,7 +3,7 @@
 
 // Bring application forward
 app.bringToFront();
-
+import { CreateDialog } from "./Dialog/dialog";
 // Set active Document variable and decode name for output
 var docRef = app.activeDocument;
 var docName = decodeURI(activeDocument.name);
@@ -19,7 +19,7 @@ var docName = decodeURI(activeDocument.name);
   }
   var f;
   var fileType;
-  var win = new Window("dialog", "CMDBANNER.IO EXPORT OPTIONS", [150, 150, 460, 650]);
+  var win = new Window("dialog", "CMDBANNER.IO EXPORT OPTIONS", [CreateDialog.x, CreateDialog.y, 460, 650]);
 
   // Add a panel
   win.radioPanel = win.add("panel", [25, 105, 285, 230], "Export Options");
@@ -188,7 +188,7 @@ var docName = decodeURI(activeDocument.name);
 
   function SelectCopy(titleGroup, docName, fname) {
     // Add a panel
-    var win = new Window("dialog", "Edit Copy", [150, 150, 560, 70 * titleGroup.layers.length + 310]);
+    var win = new Window("dialog", "Edit Copy", [150, 150, 560, 50 * titleGroup.layers.length + 310]);
     win.radioPanel = win.add("panel", [25, 25, 380, 330], "Select copy");
 
     var skipIndex = 0;
@@ -208,7 +208,7 @@ var docName = decodeURI(activeDocument.name);
           win.radioPanel.r3 = win.radioPanel.add("radiobutton", [10, 15 + (r * 30), 300, 35 + (3 * 30)], titleGroup.layers[3]);
         }
         if (r === 4) {
-          win.radioPanel.r4 = win.radioPanel.add("radiobutton", [10, 15 + (r * 30), 300, 35 + (4 * 30)], titleGroup.layers[4]);
+          win.radioPanel.r4 = win.radioPanel.add("radiobutton", [10, 15 + (r * 30), 0, 35 + (4 * 30)], titleGroup.layers[4]);
         }
       }
     }
@@ -226,26 +226,26 @@ var docName = decodeURI(activeDocument.name);
         titleGroup.layers[0].visible = true;
         titleGroup.layers[1].visible = false;
         titleGroup.layers[2].visible = false;
-        titleGroup.layers[2].visible = false;
+        titleGroup.layers[3].visible = false;
       }
       else if (win.radioPanel.r1.value) {
         titleGroup.layers[0].visible = false;
         titleGroup.layers[1].visible = true;
         titleGroup.layers[2].visible = false;
-        titleGroup.layers[2].visible = false;
+        titleGroup.layers[3].visible = false;
       }
       else if (win.radioPanel.r2.value) {
         titleGroup.layers[0].visible = false;
         titleGroup.layers[1].visible = false;
         titleGroup.layers[2].visible = true;
-        titleGroup.layers[2].visible = false;
-        alert("here")
-      }else if (win.radioPanel.r3.value) {
+        titleGroup.layers[3].visible = false;
+
+      } else if (win.radioPanel.r3.value) {
         titleGroup.layers[0].visible = false;
         titleGroup.layers[1].visible = false;
         titleGroup.layers[2].visible = false;
-        titleGroup.layers[2].visible = true;
-        alert("here")
+        titleGroup.layers[3].visible = true;
+
       }
 
     }
@@ -272,8 +272,6 @@ var docName = decodeURI(activeDocument.name);
         var opts = new JPEGSaveOptions();
         opts.quality = 10;
         docRef.saveAs(file, opts, true);
-
-
       } else if (fileType == ".png") {
         alert("png file not found");
       } else if (fileType == ".gif") {
